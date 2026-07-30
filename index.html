@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Max Decker — Filmmaker</title>
+<meta name="description" content="Max Decker. Director, writer, actor. Currently streaming Retrograde Los Angeles & Action 8. Partnering with Trifecta Films on Romeo & Juliet." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg: #0e0e0c;
+    --bg-2: #161613;
+    --ink: #ece8df;
+    --ink-2: #b8b3a6;
+    --muted: #75716a;
+    --line: #2a2823;
+    --accent: #d4a857;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter', system-ui, sans-serif;
+    font-weight:300;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  .serif{font-family:'Instrument Serif', Georgia, serif;font-weight:400}
+  .mono{
+    font-family:'Inter', sans-serif;
+    font-size:10px;
+    letter-spacing:.28em;
+    text-transform:uppercase;
+    font-weight:400;
+    color:var(--muted);
+  }
+
+  /* ───── NAV ───── */
+  nav{
+    position:fixed;top:0;left:0;right:0;
+    z-index:100;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:24px 48px;
+    background:rgba(14,14,12,.7);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line);
+  }
+  .brand{font-family:'Instrument Serif',serif;font-style:italic;font-size:22px;color:var(--ink)}
+  nav ul{display:flex;gap:36px;list-style:none}
+  nav a{
+    color:var(--ink-2);text-decoration:none;
+    font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:400;
+    transition:color .25s;
+  }
+  nav a:hover{color:var(--accent)}
+  @media (max-width:720px){nav ul{display:none} nav{padding:18px 24px}}
+
+  /* ───── HERO ───── */
+  .hero{
+    min-height:100vh;
+    display:flex;flex-direction:column;justify-content:flex-end;
+    padding:160px 48px 80px;
+    max-width:1400px;
+    margin:0 auto;
+    position:relative;
+  }
+  /* Soft vignette */
+  .hero::before{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(ellipse at 70% 30%, rgba(212,168,87,.08), transparent 60%);
+    pointer-events:none;
+  }
+  .hero-inner{position:relative;z-index:2}
+  .hero .top-tag{
+    display:flex;align-items:center;gap:14px;
+    margin-bottom:auto;
+    padding-bottom:80px;
+  }
+  .hero .top-tag .dot{width:6px;height:6px;background:var(--accent);border-radius:50%;box-shadow:0 0 10px var(--accent)}
+  .hero h1{
+    font-family:'Instrument Serif',serif;
+    font-weight:400;
+    font-size:clamp(72px, 16vw, 240px);
+    line-height:.85;
+    letter-spacing:-.03em;
+    color:var(--ink);
+    margin-bottom:48px;
+  }
+  .hero h1 em{font-style:italic;color:var(--accent)}
+  .hero-meta{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:48px;
+    padding-top:32px;
+    border-top:1px solid var(--line);
+    max-width:1100px;
+  }
+  .hero-meta .col p{font-family:'Instrument Serif',serif;font-size:18px;line-height:1.45;margin-top:10px;color:var(--ink-2)}
+  .hero-meta em{font-style:italic;color:var(--ink)}
+  @media (max-width:720px){
+    .hero{padding:120px 24px 60px}
+    .hero-meta{grid-template-columns:1fr;gap:24px}
+  }
+
+  /* ───── SECTIONS ───── */
+  section{padding:140px 48px}
+  .container{max-width:1400px;margin:0 auto}
+  .section-head{
+    display:grid;
+    grid-template-columns:1fr 2fr;
+    gap:60px;
+    margin-bottom:80px;
+    padding-bottom:32px;
+    border-bottom:1px solid var(--line);
+    align-items:end;
+  }
+  .section-head .label{display:flex;align-items:center;gap:14px}
+  .section-head .label .num{color:var(--accent);font-weight:500}
+  .section-head h2{
+    font-family:'Instrument Serif',serif;
+    font-weight:400;
+    font-size:clamp(40px,5.5vw,72px);
+    line-height:1;
+    letter-spacing:-.02em;
+    color:var(--ink);
+  }
+  .section-head h2 em{font-style:italic;color:var(--accent)}
+  @media (max-width:720px){
+    section{padding:90px 24px}
+    .section-head{grid-template-columns:1fr;gap:24px;margin-bottom:48px}
+  }
+
+  /* ───── ABOUT ───── */
+  .about{
+    display:grid;
+    grid-template-columns:1.2fr 1fr;
+    gap:100px;
+    align-items:start;
+  }
+  .about-prose p{font-family:'Instrument Serif',serif;font-size:22px;line-height:1.5;margin-bottom:22px;color:var(--ink-2);max-width:30ch}
+  .about-prose p:first-of-type{font-size:28px;color:var(--ink);line-height:1.4}
+  .about-prose em{font-style:italic;color:var(--ink)}
+  .about-side{
+    display:grid;
+    gap:36px;
+    padding:32px 0 0 32px;
+    border-left:1px solid var(--line);
+  }
+  .about-side .item .mono{display:block;margin-bottom:8px}
+  .about-side .item p{font-family:'Instrument Serif',serif;font-size:17px;line-height:1.5;color:var(--ink)}
+  .about-side .item p em{font-style:italic;color:var(--ink-2);font-size:14px;display:block;margin-top:4px}
+  @media (max-width:900px){
+    .about{grid-template-columns:1fr;gap:48px}
+    .about-side{padding:32px 0 0;border-left:none;border-top:1px solid var(--line)}
+  }
+
+  /* ───── FILMS (cinema cards) ───── */
+  .films{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+  .film-card{
+    background:var(--bg-2);
+    border:1px solid var(--line);
+    padding:48px 40px;
+    aspect-ratio:16/10;
+    display:flex;flex-direction:column;
+    position:relative;
+    overflow:hidden;
+    transition:border-color .4s, transform .6s cubic-bezier(.2,.7,.2,1);
+  }
+  .film-card:hover{border-color:var(--accent);transform:translateY(-4px)}
+  .film-card::after{
+    content:"";position:absolute;top:0;left:0;right:0;height:1px;
+    background:linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity:0;transition:opacity .4s;
+  }
+  .film-card:hover::after{opacity:1}
+  .film-card .top{display:flex;justify-content:space-between;align-items:center}
+  .film-card h3{
+    font-family:'Instrument Serif',serif;
+    font-weight:400;
+    font-size:clamp(36px,4.5vw,56px);
+    line-height:1;
+    letter-spacing:-.02em;
+    margin:auto 0;
+    color:var(--ink);
+  }
+  .film-card h3 em{font-style:italic;color:var(--accent)}
+  .film-card .desc{font-size:14px;line-height:1.55;color:var(--ink-2);max-width:42ch;margin-bottom:18px}
+  .film-card .bot{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:14px}
+  .pills{display:flex;gap:8px;flex-wrap:wrap}
+  .pill{
+    display:inline-block;
+    padding:6px 12px;
+    border:1px solid var(--ink-2);
+    color:var(--ink);
+    border-radius:999px;
+    font-size:10px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    font-weight:400;
+  }
+  @media (max-width:720px){.films{grid-template-columns:1fr}.film-card{aspect-ratio:auto;padding:36px 28px}}
+
+  /* ───── AWARDS LEDGER ───── */
+  .ledger{border-top:1px solid var(--line)}
+  .ledger-row{
+    display:grid;
+    grid-template-columns:100px 1fr 200px;
+    gap:32px;
+    padding:32px 0;
+    border-bottom:1px solid var(--line);
+    align-items:baseline;
+    transition:padding-left .4s, background .4s;
+  }
+  .ledger-row:hover{padding-left:16px;background:rgba(212,168,87,.04)}
+  .ledger-row .yr{font-size:12px;letter-spacing:.16em;color:var(--accent);font-weight:500}
+  .ledger-row .title{font-family:'Instrument Serif',serif;font-size:clamp(22px,2.4vw,30px);line-height:1.1;color:var(--ink)}
+  .ledger-row .title em{font-style:italic}
+  .ledger-row .title small{display:block;font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-top:6px;font-weight:400}
+  .ledger-row .stat{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2);text-align:right}
+  .ledger-row .stat b{color:var(--accent);font-weight:500;display:block;font-size:18px;letter-spacing:.04em;margin-bottom:6px;font-family:'Instrument Serif',serif;font-style:italic;text-transform:none}
+  @media (max-width:720px){
+    .ledger-row{grid-template-columns:1fr;gap:8px;padding:22px 0}
+    .ledger-row .stat{text-align:left}
+  }
+
+  /* ───── PARTNER ───── */
+  .partner-bg{background:var(--bg-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .partner{
+    max-width:1100px;
+    margin:0 auto;
+  }
+  .partner + .partner{
+    margin-top:100px;
+    padding-top:100px;
+    border-top:1px solid var(--line);
+  }
+
+  /* Two-column layout when portrait present */
+  .partner.with-portrait{
+    display:grid;
+    grid-template-columns:.85fr 1.15fr;
+    gap:80px;
+    align-items:start;
+  }
+  .portrait{
+    aspect-ratio:4/5;
+    overflow:hidden;
+    background:var(--bg);
+    position:relative;
+    border:1px solid var(--line);
+  }
+  .portrait img{
+    width:100%;height:100%;object-fit:cover;
+    filter:contrast(1.05) brightness(.92) saturate(.9);
+    transition:transform 1.6s cubic-bezier(.2,.7,.2,1), filter 1.2s;
+  }
+  .portrait:hover img{transform:scale(1.04);filter:contrast(1.05) brightness(1) saturate(1)}
+  .portrait::after{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(180deg,transparent 50%, rgba(14,14,12,.4));
+  }
+  .portrait .tag{
+    position:absolute;bottom:18px;left:18px;z-index:2;
+    color:var(--ink);
+    font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+  }
+
+  .partner-body .mono{display:block;margin-bottom:18px}
+  .partner-body h3{
+    font-family:'Instrument Serif',serif;
+    font-weight:400;
+    font-size:clamp(56px,9vw,128px);
+    line-height:.9;
+    letter-spacing:-.025em;
+    margin-bottom:36px;
+    color:var(--ink);
+  }
+  .partner-body h3 em{font-style:italic;color:var(--accent)}
+  .partner-body .pills{margin-bottom:32px}
+  .partner-body p{font-family:'Instrument Serif',serif;font-size:21px;line-height:1.55;margin-bottom:20px;color:var(--ink-2);max-width:62ch}
+  .partner-body em{font-style:italic;color:var(--ink)}
+  .partner-body strong{font-weight:400;color:var(--accent);font-style:italic}
+
+  .factbox{
+    margin-top:48px;
+    padding-top:32px;
+    border-top:1px solid var(--line);
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:24px 48px;
+  }
+  .fact{display:grid;grid-template-columns:140px 1fr;gap:24px;align-items:baseline}
+  .fact dt{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+  .fact dd{font-family:'Instrument Serif',serif;font-size:20px;line-height:1.3;color:var(--ink)}
+  .fact dd em{font-style:italic;color:var(--ink-2);font-size:15px;display:block;margin-top:2px}
+  @media (max-width:900px){
+    .factbox{grid-template-columns:1fr}
+    .fact{grid-template-columns:1fr;gap:2px}
+    .partner.with-portrait{grid-template-columns:1fr;gap:40px}
+    .partner + .partner{margin-top:60px;padding-top:60px}
+  }
+
+  /* ───── PROJECT ───── */
+  .project{
+    text-align:center;
+    padding:200px 48px;
+    position:relative;
+  }
+  .project::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(ellipse at center, rgba(212,168,87,.06), transparent 65%);
+  }
+  .project .container{position:relative;z-index:2}
+  .project .mono{display:block;margin-bottom:30px}
+  .project .mark{
+    font-family:'Instrument Serif',serif;
+    font-weight:400;
+    font-size:clamp(64px,13vw,200px);
+    line-height:.9;
+    letter-spacing:-.035em;
+    margin-bottom:36px;
+    color:var(--ink);
+  }
+  .project .mark em{font-style:italic;color:var(--accent)}
+  .project .lede{
+    max-width:640px;margin:0 auto 48px;
+    font-family:'Instrument Serif',serif;
+    font-size:22px;line-height:1.5;
+    color:var(--ink-2);
+  }
+  .project .lede em{font-style:italic;color:var(--ink)}
+  .project .lede strong{font-weight:400;color:var(--accent);font-style:italic}
+  .project .three{
+    display:flex;justify-content:center;align-items:center;gap:24px;
+    font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-2);
+  }
+  .project .three .sep{width:24px;height:1px;background:var(--line)}
+  @media (max-width:720px){
+    .project{padding:120px 24px}
+    .project .three{flex-direction:column;gap:12px}
+    .project .three .sep{width:1px;height:14px}
+  }
+
+  /* ───── FOOTER ───── */
+  footer{border-top:1px solid var(--line);padding:60px 48px 36px}
+  .foot{
+    max-width:1400px;margin:0 auto;
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr;
+    gap:48px;
+  }
+  .foot h4{
+    font-size:10px;letter-spacing:.24em;text-transform:uppercase;
+    color:var(--muted);font-weight:400;margin-bottom:14px;
+  }
+  .foot a{
+    color:var(--ink);text-decoration:none;display:block;
+    font-family:'Instrument Serif',serif;font-size:18px;
+    margin-bottom:6px;transition:color .2s;
+  }
+  .foot a:hover{color:var(--accent);font-style:italic}
+  .foot p.col-text{font-family:'Instrument Serif',serif;font-size:17px;line-height:1.5;color:var(--ink-2);max-width:34ch}
+  .foot p.col-text em{font-style:italic;color:var(--ink)}
+  .foot-bottom{
+    max-width:1400px;margin:60px auto 0;
+    padding-top:24px;
+    border-top:1px solid var(--line);
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;
+    font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);
+  }
+  @media (max-width:720px){.foot{grid-template-columns:1fr;gap:30px}}
+
+  /* ───── REVEAL ───── */
+  .reveal{opacity:0;transform:translateY(20px);transition:opacity 1.2s ease, transform 1.2s ease}
+  .reveal.in{opacity:1;transform:none}
+  .reveal-d1{transition-delay:.1s}.reveal-d2{transition-delay:.2s}.reveal-d3{transition-delay:.3s}.reveal-d4{transition-delay:.4s}
+
+  ::selection{background:var(--accent);color:var(--bg)}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand">Max Decker</div>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#films">Films</a></li>
+    <li><a href="#awards">Awards</a></li>
+    <li><a href="#partner">Partner</a></li>
+    <li><a href="#project">Project</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-inner">
+    <div class="top-tag reveal">
+      <span class="dot"></span>
+      <span class="mono">Director · Writer · Actor — Los Angeles</span>
+    </div>
+    <h1 class="reveal reveal-d1">Max<br><em>Decker.</em></h1>
+    <div class="hero-meta">
+      <div class="col reveal reveal-d2">
+        <span class="mono">Now Streaming</span>
+        <p><em>Retrograde Los&nbsp;Angeles</em><br><em>Action&nbsp;8</em></p>
+      </div>
+      <div class="col reveal reveal-d3">
+        <span class="mono">Available On</span>
+        <p>Tubi<br>The Roku Channel</p>
+      </div>
+      <div class="col reveal reveal-d4">
+        <span class="mono">In Development</span>
+        <p><em>Romeo &amp; Juliet</em><br>with Trifecta Films</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="section-head">
+      <div class="label reveal">
+        <span class="mono"><span class="num">01 /</span></span>
+        <span class="mono">About</span>
+      </div>
+      <h2 class="reveal reveal-d1">A career built between New York and <em>Los Angeles.</em></h2>
+    </div>
+
+    <div class="about">
+      <div class="about-prose reveal">
+        <p>Raised in McAllen, Texas, Max Decker moved to New York to study at the Neighborhood Playhouse under Kathryn Gately while playing Carlos Reyes on <em>All My Children</em>.</p>
+        <p>He was offered a role in the 2002 Tony Award–winning play <em>Take Me Out</em> by Richard Greenberg before relocating to Los Angeles, where he began guest-starring on television opposite Jason Momoa on <em>North Shore</em> and working with directors like David Mamet on <em>The Unit</em>. He later joined the cast of J.J. Abrams' ABC pilot <em>The Catch</em>.</p>
+        <p>His on-camera credits span more than a dozen guest-starring roles — <em>Criminal Minds</em>, <em>The Mentalist</em>, <em>NCIS: LA</em>, <em>Mayans M.C.</em>, <em>9-1-1: Lone Star</em>, and others. As a director, his feature debut <em>Retrograde Los Angeles</em> earned 45 wins and 12 nominations on the festival circuit.</p>
+      </div>
+
+      <div class="about-side reveal reveal-d2">
+        <div class="item">
+          <span class="mono">Born</span>
+          <p>McAllen, Texas<em>Based in Los Angeles</em></p>
+        </div>
+        <div class="item">
+          <span class="mono">Trained</span>
+          <p>Neighborhood Playhouse<em>Under Kathryn Gately, NYC</em></p>
+        </div>
+        <div class="item">
+          <span class="mono">Coaching</span>
+          <p>Acting coach since 2010<em>Los Angeles</em></p>
+        </div>
+        <div class="item">
+          <span class="mono">Index</span>
+          <p>40+ credits<em>Across film &amp; television</em></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FILMS -->
+<section id="films">
+  <div class="container">
+    <div class="section-head">
+      <div class="label reveal">
+        <span class="mono"><span class="num">02 /</span></span>
+        <span class="mono">Now Streaming</span>
+      </div>
+      <h2 class="reveal reveal-d1">Two films, available <em>now.</em></h2>
+    </div>
+
+    <div class="films">
+      <article class="film-card reveal">
+        <div class="top"><span class="mono">Feature · Director · Writer</span></div>
+        <h3><em>Retrograde</em><br>Los Angeles</h3>
+        <p class="desc">A drama about identity, ambition, and the gravitational pull of a city that promises everything.</p>
+        <div class="bot">
+          <div class="pills">
+            <span class="pill">Tubi</span>
+            <span class="pill">Roku</span>
+          </div>
+          <span class="mono">45 wins · 12 noms</span>
+        </div>
+      </article>
+
+      <article class="film-card reveal reveal-d1">
+        <div class="top"><span class="mono">Feature · Director · Co-writer</span></div>
+        <h3>Action<br>Eight.</h3>
+        <p class="desc">A satirical comedy about a real journalist navigating a podcast-era newsroom — where infotainment is slowly eating the news.</p>
+        <div class="bot">
+          <div class="pills">
+            <span class="pill">Tubi</span>
+            <span class="pill">Roku</span>
+          </div>
+          <span class="mono">New release</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- AWARDS -->
+<section id="awards">
+  <div class="container">
+    <div class="section-head">
+      <div class="label reveal">
+        <span class="mono"><span class="num">03 /</span></span>
+        <span class="mono">Recognition</span>
+      </div>
+      <h2 class="reveal reveal-d1">Awards &amp; <em>festival.</em></h2>
+    </div>
+
+    <div class="ledger">
+      <div class="ledger-row reveal">
+        <div class="yr">2020</div>
+        <div class="title"><em>Retrograde Los Angeles</em><small>Director · Writer · Producer · Feature</small></div>
+        <div class="stat"><b>45 / 12</b>Wins · Nominations</div>
+      </div>
+      <div class="ledger-row reveal reveal-d1">
+        <div class="yr">2024</div>
+        <div class="title"><em>Retrograde: For the Art</em><small>Director · Short Film</small></div>
+        <div class="stat"><b>14 / 2</b>Wins · Nominations</div>
+      </div>
+      <div class="ledger-row reveal reveal-d2">
+        <div class="yr">2025</div>
+        <div class="title"><em>Action 8</em><small>Director · Co-writer · Feature</small></div>
+        <div class="stat"><b>1 win</b>Festival circuit</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNER -->
+<section id="partner" class="partner-bg">
+  <div class="container">
+    <div class="section-head">
+      <div class="label reveal">
+        <span class="mono"><span class="num">04 /</span></span>
+        <span class="mono">The Producing Team</span>
+      </div>
+      <h2 class="reveal reveal-d1">Collaborators &amp; <em>partners.</em></h2>
+    </div>
+
+    <div class="partner">
+      <div class="partner-body reveal">
+        <span class="mono">Writing &amp; Producing Partner</span>
+        <h3>Crayton<br><em>Carrozza.</em></h3>
+        <div class="pills">
+          <span class="pill">Actor</span>
+          <span class="pill">Writer</span>
+          <span class="pill">Producer</span>
+          <span class="pill">Vogue Europe</span>
+        </div>
+        <p>Originally from Austin, Texas, Crayton came up as a former NCAA Champion track athlete at the University of Texas — a six-time All-American and program record-holder in the 800m before turning to film and stage.</p>
+        <p>He is a Vogue Europe cover model and stars in the new Badlands feature <em>Dangerous Games to Play in the Dark</em>. He is currently on stage in the play <em>Sunday in New York</em>.</p>
+        <p>Crayton is Max Decker's writing and producing partner. Together, they are partnering with <strong>Trifecta Films</strong> to develop a contemporary reimagining of <em>Romeo and Juliet</em>, in which Crayton stars in the title role.</p>
+
+        <dl class="factbox">
+          <div class="fact"><dt>Lead Role</dt><dd>Romeo &amp; Juliet<em>In development with Trifecta Films</em></dd></div>
+          <div class="fact"><dt>Film</dt><dd>Dangerous Games to Play in the Dark<em>A Badlands feature</em></dd></div>
+          <div class="fact"><dt>Stage</dt><dd>Sunday in New York<em>Currently performing</em></dd></div>
+          <div class="fact"><dt>Editorial</dt><dd>Vogue Europe<em>Cover</em></dd></div>
+          <div class="fact"><dt>Athletics</dt><dd>NCAA Champion · Texas<em>6× All-American · 800m program record</em></dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="partner with-portrait">
+      <div class="portrait reveal">
+        <img src="liz.png" alt="Liz Fuller" />
+        <span class="tag mono">Fuller · F.02</span>
+      </div>
+
+      <div class="partner-body reveal reveal-d2">
+        <span class="mono">Producing Partner · CEO, ST8RM</span>
+        <h3>Liz<br><em>Fuller.</em></h3>
+        <div class="pills">
+          <span class="pill">Producer</span>
+          <span class="pill">Executive Producer</span>
+          <span class="pill">CEO, ST8RM</span>
+          <span class="pill">30+ Years</span>
+        </div>
+        <p>Liz Fuller is a British-American producer, executive producer, and CEO of <strong>ST8RM</strong> with over 30 years of experience in film, television, and talent management.</p>
+        <p>She specializes in developing commercially driven intellectual property, packaging projects, and connecting creatives with global financing and distribution partners.</p>
+        <p>Passionate about discovering talent and building lasting entertainment brands, Liz is dedicated to bringing scalable stories to audiences worldwide — and joins Max Decker and Crayton Carrozza as producing partner on <em>Romeo &amp; Juliet</em>.</p>
+
+        <dl class="factbox">
+          <div class="fact"><dt>Role</dt><dd>Producing Partner<em>Romeo &amp; Juliet</em></dd></div>
+          <div class="fact"><dt>Company</dt><dd>ST8RM<em>Chief Executive Officer</em></dd></div>
+          <div class="fact"><dt>Focus</dt><dd>IP Development &amp; Packaging<em>Commercial franchise strategy</em></dd></div>
+          <div class="fact"><dt>Reach</dt><dd>Global Financing &amp; Distribution<em>Talent management &amp; partnerships</em></dd></div>
+          <div class="fact"><dt>Tenure</dt><dd>30+ Years<em>Film · Television · Talent</em></dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECT -->
+<section id="project" class="project">
+  <div class="container">
+    <span class="mono reveal">05 / In Development</span>
+    <div class="mark reveal reveal-d1"><em>Romeo</em><br>&amp; Juliet.</div>
+    <p class="lede reveal reveal-d2">Max Decker, Crayton Carrozza, and Liz Fuller are partnering with <strong>Trifecta Films</strong> to develop and produce a contemporary reimagining of the world's most famous love story.</p>
+    <div class="three reveal reveal-d3">
+      <span>Develop</span><span class="sep"></span>
+      <span>Produce</span><span class="sep"></span>
+      <span>Release</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot">
+    <div>
+      <h4>Max Decker</h4>
+      <p class="col-text">Director, writer, and actor based in Los Angeles. Born in McAllen, Texas. Currently partnering with <em>Trifecta Films</em> on Romeo &amp; Juliet.</p>
+    </div>
+    <div>
+      <h4>Watch</h4>
+      <a href="https://tubitv.com" target="_blank" rel="noopener">Tubi</a>
+      <a href="#">The Roku Channel</a>
+      <a href="https://www.imdb.com/name/nm1229677/" target="_blank" rel="noopener">IMDb</a>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <a href="mailto:maxdecker1876@icloud.com">maxdecker1876@icloud.com<br><span style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)">Max Decker</span></a>
+      <a href="mailto:carrozzacrayton@gmail.com" style="margin-top:14px">carrozzacrayton@gmail.com<br><span style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)">Crayton Carrozza</span></a>
+      <a href="#" style="margin-top:14px">Los Angeles, CA</a>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© <span id="yr"></span> Max Decker</span>
+    <span>maxdeckerfilms.com</span>
+  </div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}
+    });
+  },{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  document.getElementById('yr').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
